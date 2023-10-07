@@ -19,6 +19,8 @@
 		AC690CB22ACF40C300138E0B /* MainScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690CAD2ACF40C300138E0B /* MainScreenAssembly.swift */; };
 		AC690CB32ACF40C300138E0B /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690CAE2ACF40C300138E0B /* MainScreenInteractor.swift */; };
 		AC690CB42ACF40C300138E0B /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690CAF2ACF40C300138E0B /* MainScreenView.swift */; };
+		AC690CBB2AD111B500138E0B /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690CBA2AD111B500138E0B /* CoinView.swift */; };
+		AC690CBE2AD111DA00138E0B /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690CBD2AD111DA00138E0B /* CoinModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		AC690CAD2ACF40C300138E0B /* MainScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAssembly.swift; sourceTree = "<group>"; };
 		AC690CAE2ACF40C300138E0B /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
 		AC690CAF2ACF40C300138E0B /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		AC690CBA2AD111B500138E0B /* CoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
+		AC690CBD2AD111DA00138E0B /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		ACDCC0DF2ACC9BB1002D2F68 /* TapTap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapTap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -116,13 +120,63 @@
 		AC690CAA2ACF409C00138E0B /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				AC690CAB2ACF40C300138E0B /* MainScreenFactory.swift */,
-				AC690CAD2ACF40C300138E0B /* MainScreenAssembly.swift */,
-				AC690CAE2ACF40C300138E0B /* MainScreenInteractor.swift */,
-				AC690CAC2ACF40C300138E0B /* MainScreenViewController.swift */,
-				AC690CAF2ACF40C300138E0B /* MainScreenView.swift */,
+				AC690CB92AD111A100138E0B /* Factory */,
+				AC690CB82AD1119800138E0B /* Assembly */,
+				AC690CBC2AD111C300138E0B /* Models */,
+				AC690CB72AD1118700138E0B /* Interactor */,
+				AC690CB62AD1118000138E0B /* Presenter */,
+				AC690CB52AD1117600138E0B /* View */,
 			);
 			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		AC690CB52AD1117600138E0B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CAF2ACF40C300138E0B /* MainScreenView.swift */,
+				AC690CBA2AD111B500138E0B /* CoinView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC690CB62AD1118000138E0B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CAC2ACF40C300138E0B /* MainScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		AC690CB72AD1118700138E0B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CAE2ACF40C300138E0B /* MainScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AC690CB82AD1119800138E0B /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CAD2ACF40C300138E0B /* MainScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		AC690CB92AD111A100138E0B /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CAB2ACF40C300138E0B /* MainScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		AC690CBC2AD111C300138E0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC690CBD2AD111DA00138E0B /* CoinModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ACDCC0D62ACC9BB1002D2F68 = {
@@ -211,9 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC690CBB2AD111B500138E0B /* CoinView.swift in Sources */,
 				AC690CB22ACF40C300138E0B /* MainScreenAssembly.swift in Sources */,
 				AC690CB42ACF40C300138E0B /* MainScreenView.swift in Sources */,
 				AC690C752ACF223C00138E0B /* SceneDelegate.swift in Sources */,
+				AC690CBE2AD111DA00138E0B /* CoinModel.swift in Sources */,
 				AC690C732ACF223C00138E0B /* AppDelegate.swift in Sources */,
 				AC690CB12ACF40C300138E0B /* MainScreenViewController.swift in Sources */,
 				AC690C702ACF223C00138E0B /* RootCoordinator.swift in Sources */,
