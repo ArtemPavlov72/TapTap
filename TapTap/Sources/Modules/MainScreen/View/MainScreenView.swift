@@ -53,6 +53,7 @@ private extension MainScreenView {
     backgroundColor = .white
 
     generateButton.setTitle("Play", for: .normal)
+    generateButton.backgroundColor = .brown
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
 
     resultLabel.text = "Result text"
