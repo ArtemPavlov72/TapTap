@@ -2,7 +2,7 @@
 //  MainScreenCoordinator.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 04.10.2023.
+//  Created by Artem Pavlov on 04.10.2023.
 //
 
 import UIKit
@@ -46,7 +46,6 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   /// Ининциализатор
   /// - Parameters:
   ///   - navigationController: Навигейшн контроллер
-  ///   - services: Сервисы приложения
   init(_ navigationController: UINavigationController, _ window: UIWindow?) {
     self.navigationController = navigationController
     self.window = window

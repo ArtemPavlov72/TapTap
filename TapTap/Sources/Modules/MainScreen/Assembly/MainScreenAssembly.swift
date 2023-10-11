@@ -2,7 +2,7 @@
 //  MainScreenAssembly.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 06.10.2023.
+//  Created by Artem Pavlov on 06.10.2023.
 //
 
 import UIKit

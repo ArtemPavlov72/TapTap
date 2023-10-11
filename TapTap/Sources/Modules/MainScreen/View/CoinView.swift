@@ -2,7 +2,7 @@
 //  CoinView.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 07.10.2023.
+//  Created by Artem Pavlov on 07.10.2023.
 //
 
 import UIKit
@@ -12,11 +12,8 @@ class CoinView: UIView {
 
   // MARK: - Private properties
 
-  /// добавляем объект вьюшки для отображения сцены
   private var sceneView = SCNView()
-
-  ///добавляем сцену
-  private var scene = SCNScene()
+  private var screenScene = SCNScene()
 
   // MARK: - Initialization
 
@@ -37,66 +34,11 @@ class CoinView: UIView {
 private extension CoinView {
   func setupView() {
     configureLayout()
+ //   sceneView.backgroundColor = .lightGray
   }
 
   func setupScene() {
-    sceneView.scene = scene
-
-    let camera = SCNCamera()
-    let cameraNode = SCNNode()
-    cameraNode.camera = camera
-    ///устанавливаем положение основного объекта
-    cameraNode.position = SCNVector3(x: -3.0, y: 3.0, z: 4.0)
-
-    /// добавляем дополнительные рассеянный свет
-    let ambientLight = SCNLight()
-    ambientLight.type = SCNLight.LightType.ambient
-    ambientLight.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
-    cameraNode.light = ambientLight
-
-    /// основной свет точечный
-    let light = SCNLight()
-    light.type = SCNLight.LightType.spot
-    light.spotInnerAngle = 50.0
-    light.spotOuterAngle = 80.0
-    light.castsShadow = true
-    let lightNode = SCNNode()
-    lightNode.light = light
-    lightNode.position = SCNVector3(x: 1.5, y: 3.5, z: 3.5)
-
-    /// cube
-
-    let cubeGeometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
-    let cubeNode = SCNNode(geometry: cubeGeometry)
-
-    ///красим куб в красный
-    let redMaterial = SCNMaterial()
-    redMaterial.diffuse.contents = UIColor.red
-    cubeGeometry.materials = [redMaterial]
-
-    /// plane
-
-    let planeGeometry = SCNPlane(width: 50.0, height: 50.0)
-    let planeNode = SCNNode(geometry: planeGeometry)
-    planeNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: 0, z: 0)
-    planeNode.position = SCNVector3(x: 0, y: -0.5, z: 0)
-
-    ///красим дополнительный объект в зеленый
-    let greenMaterial = SCNMaterial()
-    greenMaterial.diffuse.contents = UIColor.green
-    planeGeometry.materials = [greenMaterial]
-
-    /// добавляем свет, камеру и объекты на сцену
-
-    scene.rootNode.addChildNode(lightNode)
-    scene.rootNode.addChildNode(cameraNode)
-    scene.rootNode.addChildNode(cubeNode)
-    scene.rootNode.addChildNode(planeNode)
-
-    let constraint = SCNLookAtConstraint(target: cubeNode)
-    constraint.isGimbalLockEnabled = true
-    cameraNode.constraints = [constraint]
-    lightNode.constraints = [constraint]
+    sceneView.scene = screenScene
   }
 
   func configureLayout() {
@@ -111,5 +53,34 @@ private extension CoinView {
       sceneView.trailingAnchor.constraint(equalTo: trailingAnchor),
       sceneView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
+  }
+
+  func createCoin(position: SCNVector3, sides: [UIImage]) -> SCNNode {
+    let geometry = SCNCylinder(radius: 2.2, height: 0.2)
+
+    let material1 = SCNMaterial()
+    material1.diffuse.contents = sides[0]
+    let material2 = SCNMaterial()
+    material2.diffuse.contents = sides[1]
+    geometry.materials = [material1, material2]
+
+    let shape = SCNPhysicsShape(geometry: geometry, options: nil)
+    let coinBody = SCNPhysicsBody(type: .dynamic, shape: shape)
+    let node = SCNNode(geometry: geometry)
+
+    coinBody.restitution = 0.4
+    coinBody.friction = 1
+    coinBody.mass = 1.0
+    coinBody.collisionBitMask = 1
+    coinBody.contactTestBitMask = 1
+    coinBody.velocityFactor = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
+    coinBody.angularVelocityFactor = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
+    coinBody.categoryBitMask = 1
+
+    node.physicsBody = coinBody
+    node.physicsBody?.collisionBitMask = 1
+    node.physicsBody?.contactTestBitMask = 1
+    node.position = position
+    return node
   }
 }

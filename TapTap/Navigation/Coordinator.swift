@@ -2,7 +2,7 @@
 //  Coordinator.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 04.10.2023.
+//  Created by Artem Pavlov on 04.10.2023.
 //
 
 import Foundation

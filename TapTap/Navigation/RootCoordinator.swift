@@ -2,7 +2,7 @@
 //  RootCoordinator.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 04.10.2023.
+//  Created by Artem Pavlov on 04.10.2023.
 //
 
 import UIKit
@@ -38,7 +38,6 @@ final class RootCoordinator: RootCoordinatorProtocol {
 
   /// - Parameters:
   ///   - window: Окно просмотра
-  ///   - services: Сервисы приложения
   init(_ window: UIWindow) {
     self.window = window
   }
