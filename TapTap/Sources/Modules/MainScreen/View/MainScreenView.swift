@@ -11,7 +11,12 @@ import UIKit
 protocol MainScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
-protocol MainScreenViewInput {}
+protocol MainScreenViewInput {
+
+  /// Обновить контент
+  /// - Parameter model: Модель
+  func updateContentWith()
+}
 
 /// Псевдоним протокола UIView & MainScreenViewInput
 typealias MainScreenViewProtocol = UIView & MainScreenViewInput
@@ -44,6 +49,9 @@ final class MainScreenView: MainScreenViewProtocol {
   
   // MARK: - Internal func
 
+  func updateContentWith() {
+    coinView.updateCoinWith()
+  }
 }
 
 // MARK: - Private

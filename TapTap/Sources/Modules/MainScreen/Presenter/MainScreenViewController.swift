@@ -61,7 +61,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
    // view.backgroundColor = .blue
-    
+    moduleView.updateContentWith() //загружаем монетку для теста
   }
 }
 
