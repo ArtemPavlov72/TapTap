@@ -11,18 +11,10 @@ import UIKit
 protocol MainScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MainScreenInteractorInput {
-
-  /// Была нажата кнопку генерации
-  func generateButtonAction()
-}
+protocol MainScreenInteractorInput {}
 
 /// Интерактор
 final class MainScreenInteractor: MainScreenInteractorInput {
-  func generateButtonAction() {
-
-  }
-
   
   // MARK: - Internal properties
   

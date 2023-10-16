@@ -8,21 +8,13 @@
 import UIKit
 
 /// События которые отправляем из View в Presenter
-protocol MainScreenViewOutput: AnyObject {
-
-  /// Было нажатие на результат генерации
-  func resultLabelAction()
-
-  /// Была нажата кнопку генерации
-  func generateButtonAction()
-}
+protocol MainScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
 protocol MainScreenViewInput {
 
   /// Обновить контент
-  /// - Parameter model: Модель
-  func updateContentWith()
+  func updateContent()
 }
 
 /// Псевдоним протокола UIView & MainScreenViewInput
@@ -56,7 +48,7 @@ final class MainScreenView: MainScreenViewProtocol {
   
   // MARK: - Internal func
 
-  func updateContentWith() {
+  func updateContent() {
     coinView.updateCoinWith()
   }
 }
@@ -67,11 +59,14 @@ private extension MainScreenView {
   func applyDefaultBehavior() {
     backgroundColor = .white
 
-    generateButton.setTitle("Play", for: .normal)
+    generateButton.setTitle("Flip!", for: .normal)
     generateButton.backgroundColor = .brown
+    generateButton.layer.cornerRadius = 8
+    generateButton.setTitleColor(.black, for: .highlighted)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
 
     resultLabel.font = .boldSystemFont(ofSize: 50)
+    resultLabel.text = "Waiting.."
 
     coinView.valueCoinAction = { [weak self] coinResultType in
       guard let self else {
@@ -79,11 +74,9 @@ private extension MainScreenView {
       }
 
       let coinResultText = coinResultType == .eagle ? "Eagle" : "Tails"
-      print(coinResultText)
       self.resultLabel.text = coinResultText
     }
   }
-
 
   func setupConstraints() {
     [coinView, resultLabel, generateButton].forEach {
@@ -108,18 +101,11 @@ private extension MainScreenView {
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -8)
     ])
-
   }
 
   @objc
   func generateButtonAction() {
-//    output?.generateButtonAction()
-    resultLabel.text = ""
+    resultLabel.text = "Waiting.."
     coinView.handleTap()
-  }
-
-  @objc
-  func resultAction() {
- //   output?.resultLabelAction()
   }
 }

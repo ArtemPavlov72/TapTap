@@ -8,12 +8,7 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol MainScreenModuleOutput: AnyObject {
-
-  /// Было нажатие на результат генерации
-  ///  - Parameter text: Результат генерации
-  func resultLabelAction(text: String?)
-}
+protocol MainScreenModuleOutput: AnyObject {}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MainScreenModuleInput {
@@ -65,22 +60,13 @@ final class MainScreenViewController: MainScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-   // view.backgroundColor = .blue
-    moduleView.updateContentWith() //загружаем монетку для теста
+    moduleView.updateContent()
   }
 }
 
 // MARK: - MainScreenViewOutput
 
-extension MainScreenViewController: MainScreenViewOutput {
-  func resultLabelAction() {
-
-  }
-
-  func generateButtonAction() {
-    
-  }
-}
+extension MainScreenViewController: MainScreenViewOutput {}
 
 // MARK: - MainScreenInteractorOutput
 
