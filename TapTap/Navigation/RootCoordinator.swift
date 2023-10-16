@@ -45,7 +45,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
   // MARK: - Internal func
 
   func start() {
-    let mainScreenCoordinator = MainScreenCoordinator(navigationController, window)
+    let mainScreenCoordinator = MainScreenCoordinator(navigationController: navigationController)
     self.mainScreenCoordinator = mainScreenCoordinator
     mainScreenCoordinator.start()
 
@@ -54,7 +54,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
   }
 
   func sceneDidBecomeActive() {
-    mainScreenCoordinator?.sceneDidBecomeActive()
+ //   mainScreenCoordinator?.sceneDidBecomeActive()
   }
 }
 

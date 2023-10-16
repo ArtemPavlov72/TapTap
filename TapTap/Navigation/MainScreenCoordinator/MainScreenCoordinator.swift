@@ -2,7 +2,7 @@
 //  MainScreenCoordinator.swift
 //  TapTap
 //
-//  Created by Artem Pavlov on 04.10.2023.
+//  Created by Артем Павлов on 04.10.2023.
 //
 
 import UIKit
@@ -15,11 +15,7 @@ protocol MainScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol MainScreenCoordinatorInput {
-
-  /// Приложение стало активным
-  func sceneDidBecomeActive()
-
-
+  
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainScreenCoordinatorOutput? { get set }
 }
@@ -38,17 +34,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   
   private var module: MainScreenModule?
   private var navigationController: UINavigationController
-  private var anyCoordinator: Coordinator?
-  private let window: UIWindow?
+
   
   // MARK: - Initialisation
   
   /// Ининциализатор
   /// - Parameters:
   ///   - navigationController: Навигейшн контроллер
-  init(_ navigationController: UINavigationController, _ window: UIWindow?) {
+  ///   - services: Сервисы приложения
+  init(navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.window = window
   }
   
   // MARK: - Life cycle
@@ -59,13 +54,15 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     self.module?.moduleOutput = self
     navigationController.pushViewController(module, animated: true)
   }
-
-  func sceneDidBecomeActive() {}
 }
 
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func resultLabelAction(text: String?) {
+    
+  }
+
   func moduleClosed() {
     finishFlow?()
   }

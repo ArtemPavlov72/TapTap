@@ -10,10 +10,15 @@ import SceneKit
 
 class CoinView: UIView {
 
+  // MARK: - Internal properties
+
+  var valueCoinAction: ((CoinModel.CoinSideType) -> Void)?
+
   // MARK: - Private properties
 
   private var sceneView = SCNView()
   private var screenScene = SCNScene()
+  private var coinNodes: [SCNNode] = []
   private var speeds: [SCNVector3] = []
 
   // MARK: - Initialization
@@ -36,6 +41,18 @@ class CoinView: UIView {
   func updateCoinWith() {
     addCoins()
   }
+
+  /// Обработать нажатие
+  func handleTap() {
+    screenScene.physicsWorld.speed = 3.0
+    let torque = setTorque()
+    let force = setForce()
+
+    for coin in coinNodes {
+      coin.physicsBody?.applyTorque(torque, asImpulse: true)
+      coin.physicsBody?.applyForce(force, asImpulse: true)
+    }
+  }
 }
 
 // MARK: - Private
@@ -45,7 +62,7 @@ private extension CoinView {
     configureLayout()
     sceneView.transform = CGAffineTransformMakeScale(-1, 1)
     sceneView.autoenablesDefaultLighting = true
- //   sceneView.delegate = self
+    sceneView.delegate = self
     sceneView.isPlaying = true
   }
 
@@ -234,8 +251,6 @@ private extension CoinView {
 
   func addCoins() {
 
-    var coinNodes: [SCNNode] = []
-
     if !coinNodes.isEmpty {
       for die in coinNodes {
         die.removeFromParentNode()
@@ -318,4 +333,41 @@ private extension CoinView {
         sceneView.bottomAnchor.constraint(equalTo: bottomAnchor)
       ])
     }
+}
+
+// MARK: - SCNSceneRendererDelegate
+
+extension CoinView: SCNSceneRendererDelegate {
+  func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+    DispatchQueue.global(qos: .userInteractive).sync { [weak self] in
+      guard let self else {
+        return
+      }
+
+      for (num, coin) in coinNodes.enumerated() {
+        if let pb = coin.physicsBody {
+          guard speeds.indices.contains(num) else {
+            continue
+          }
+
+          let os = speeds[num]
+          if !os.isZero && pb.velocity.isZero {
+            DispatchQueue.main.async {
+              let resultCoin = self.boxUpIndex(n: coin.presentation)
+              self.valueCoinAction?(resultCoin == 5 ? .eagle : .tails)
+            }
+          }
+          speeds[num] = pb.velocity
+        }
+      }
+    }
+  }
+}
+
+// MARK: - SCNVector3
+
+private extension SCNVector3 {
+  var isZero: Bool {
+    return self.x == .zero && self.y == .zero && self.z == .zero
+  }
 }

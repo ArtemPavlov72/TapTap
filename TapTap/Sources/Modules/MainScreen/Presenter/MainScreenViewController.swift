@@ -8,7 +8,12 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol MainScreenModuleOutput: AnyObject {}
+protocol MainScreenModuleOutput: AnyObject {
+
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MainScreenModuleInput {
@@ -67,7 +72,15 @@ final class MainScreenViewController: MainScreenModule {
 
 // MARK: - MainScreenViewOutput
 
-extension MainScreenViewController: MainScreenViewOutput {}
+extension MainScreenViewController: MainScreenViewOutput {
+  func resultLabelAction() {
+
+  }
+
+  func generateButtonAction() {
+    
+  }
+}
 
 // MARK: - MainScreenInteractorOutput
 

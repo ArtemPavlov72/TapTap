@@ -8,7 +8,14 @@
 import UIKit
 
 /// События которые отправляем из View в Presenter
-protocol MainScreenViewOutput: AnyObject {}
+protocol MainScreenViewOutput: AnyObject {
+
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
+
+  /// Была нажата кнопку генерации
+  func generateButtonAction()
+}
 
 /// События которые отправляем от Presenter ко View
 protocol MainScreenViewInput {
@@ -64,7 +71,17 @@ private extension MainScreenView {
     generateButton.backgroundColor = .brown
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
 
-    resultLabel.text = "Result text"
+    resultLabel.font = .boldSystemFont(ofSize: 50)
+
+    coinView.valueCoinAction = { [weak self] coinResultType in
+      guard let self else {
+        return
+      }
+
+      let coinResultText = coinResultType == .eagle ? "Eagle" : "Tails"
+      print(coinResultText)
+      self.resultLabel.text = coinResultText
+    }
   }
 
 
@@ -96,12 +113,13 @@ private extension MainScreenView {
 
   @objc
   func generateButtonAction() {
-
+//    output?.generateButtonAction()
+    resultLabel.text = ""
+    coinView.handleTap()
   }
-}
 
-// MARK: - Appearance
-
-private extension MainScreenView {
-  struct Appearance {}
+  @objc
+  func resultAction() {
+ //   output?.resultLabelAction()
+  }
 }
