@@ -13,19 +13,16 @@ protocol RootCoordinatorOutput: AnyObject {}
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol RootCoordinatorInput {
 
-  /// Приложение стало активным
-  func sceneDidBecomeActive()
-
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: RootCoordinatorOutput? { get set }
 }
 
-typealias RootCoordinatorProtocol = RootCoordinatorInput & Coordinator
+typealias RootCoordinatorProtocol = RootCoordinatorInput
 
 final class RootCoordinator: RootCoordinatorProtocol {
 
   // MARK: - Internal variables
-
+  
   weak var output: RootCoordinatorOutput?
 
   // MARK: - Private variables
@@ -51,10 +48,6 @@ final class RootCoordinator: RootCoordinatorProtocol {
 
     window.makeKeyAndVisible()
     window.rootViewController = navigationController
-  }
-
-  func sceneDidBecomeActive() {
- //   mainScreenCoordinator?.sceneDidBecomeActive()
   }
 }
 

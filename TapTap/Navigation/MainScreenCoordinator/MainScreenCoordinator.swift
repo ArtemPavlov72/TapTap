@@ -2,13 +2,13 @@
 //  MainScreenCoordinator.swift
 //  TapTap
 //
-//  Created by Артем Павлов on 04.10.2023.
+//  Created by Artem Pavlov on 04.10.2023.
 //
 
 import UIKit
 
 /// Псевдоним протокола Coordinator & MainScreenCoordinatorInput
-typealias MainScreenCoordinatorProtocol = Coordinator & MainScreenCoordinatorInput
+typealias MainScreenCoordinatorProtocol = MainScreenCoordinatorInput
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -26,15 +26,13 @@ protocol MainScreenCoordinatorInput {
 final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
-  
-  var finishFlow: (() -> Void)?
+
   weak var output: MainScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private var module: MainScreenModule?
   private var navigationController: UINavigationController
-
   
   // MARK: - Initialisation
   
@@ -61,9 +59,5 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 extension MainScreenCoordinator: MainScreenModuleOutput {
   func resultLabelAction(text: String?) {
     
-  }
-
-  func moduleClosed() {
-    finishFlow?()
   }
 }

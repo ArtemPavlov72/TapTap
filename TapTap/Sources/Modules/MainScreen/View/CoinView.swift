@@ -76,7 +76,6 @@ private extension CoinView {
     screenScene.physicsWorld.speed = 3
     screenScene.physicsWorld.gravity = SCNVector3(x: 0, y: -9.8, z: 0)
     screenScene.physicsWorld.timeStep = 1.0 / 60.0
-   // screenScene.physicsWorld.contactDelegate = self
 
     let wallSize = CGSize(width: 50.0, height: 50.0)
 
@@ -185,42 +184,6 @@ private extension CoinView {
     return SCNVector3(0, tapStrong, 0)
   }
 
-  func boxUpIndex(n: SCNNode) -> Int {
-    let rotation = n.rotation
-    let invRotation = SCNVector4(rotation.x,
-                                 rotation.y,
-                                 rotation.z,
-                                 -rotation.w)
-    let up = SCNVector3(0, 1, 0)
-    let transform = SCNMatrix4MakeRotation(invRotation.w,
-                                           invRotation.x,
-                                           invRotation.y,
-                                           invRotation.z)
-    let glkTransform = SCNMatrix4ToGLKMatrix4(transform)
-    let glkUp = SCNVector3ToGLKVector3(up)
-    let rotatedUp = GLKMatrix4MultiplyVector3(glkTransform, glkUp)
-    let boxNormals: [GLKVector3] = [
-      GLKVector3(v: (0, 0, 1)),
-      GLKVector3(v: (1, 0, 0)),
-      GLKVector3(v: (0, 0, -1)),
-      GLKVector3(v: (-1, 0, 0)),
-      GLKVector3(v: (0, 1, 0)),
-      GLKVector3(v: (0, -1, 0)),
-    ]
-
-    var bestIndex = 0
-    var maxDot: Float = -1.0
-
-    for (i, bNormal) in boxNormals.enumerated() {
-      let dot = GLKVector3DotProduct(bNormal, rotatedUp)
-      if dot > maxDot {
-        maxDot = dot
-        bestIndex = i
-      }
-    }
-    return bestIndex
-  }
-
   func wall(at position: SCNVector3,
             with normal: SCNVector3,
             sized size: CGSize,
@@ -315,6 +278,41 @@ private extension CoinView {
     return node
   }
 
+  func boxUpIndex(n: SCNNode) -> Int {
+    let rotation = n.rotation
+    let invRotation = SCNVector4(rotation.x,
+                                 rotation.y,
+                                 rotation.z,
+                                 -rotation.w)
+    let up = SCNVector3(0, 0, 0) // На что влияет?
+    let transform = SCNMatrix4MakeRotation(invRotation.w,
+                                           invRotation.x,
+                                           invRotation.y,
+                                           invRotation.z)
+    let glkTransform = SCNMatrix4ToGLKMatrix4(transform)
+    let glkUp = SCNVector3ToGLKVector3(up)
+    let rotatedUp = GLKMatrix4MultiplyVector3(glkTransform, glkUp)
+    let boxNormals: [GLKVector3] = [
+      GLKVector3(v: (0, 0, 1)),
+      GLKVector3(v: (1, 0, 0)),
+      GLKVector3(v: (0, 0, -1)),
+      GLKVector3(v: (-1, 0, 0)),
+      GLKVector3(v: (0, 1, 0)),
+      GLKVector3(v: (0, -1, 0)),
+    ]
+
+    var bestIndex = 0
+    var maxDot: Float = 0.0
+
+    for (i, bNormal) in boxNormals.enumerated() {
+      let dot = GLKVector3DotProduct(bNormal, rotatedUp)
+      if dot > maxDot {
+        maxDot = dot
+        bestIndex = i
+      }
+    }
+    return bestIndex
+  }
 }
 
   // MARK: - Configure Layout
@@ -353,6 +351,7 @@ extension CoinView: SCNSceneRendererDelegate {
           let os = speeds[num]
           if !os.isZero && pb.velocity.isZero {
             DispatchQueue.main.async {
+              // coin.presentation - состояние монеты в данный момент на экране
               let resultCoin = self.boxUpIndex(n: coin.presentation)
               self.valueCoinAction?(resultCoin == 5 ? .eagle : .tails)
             }

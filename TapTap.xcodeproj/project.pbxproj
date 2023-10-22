@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AC690C6F2ACF223C00138E0B /* MainScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690C542ACF223C00138E0B /* MainScreenCoordinator.swift */; };
 		AC690C702ACF223C00138E0B /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690C552ACF223C00138E0B /* RootCoordinator.swift */; };
-		AC690C712ACF223C00138E0B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690C562ACF223C00138E0B /* Coordinator.swift */; };
 		AC690C722ACF223C00138E0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC690C582ACF223C00138E0B /* LaunchScreen.storyboard */; };
 		AC690C732ACF223C00138E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690C5A2ACF223C00138E0B /* AppDelegate.swift */; };
 		AC690C752ACF223C00138E0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC690C5C2ACF223C00138E0B /* SceneDelegate.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		AC690C542ACF223C00138E0B /* MainScreenCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenCoordinator.swift; sourceTree = "<group>"; };
 		AC690C552ACF223C00138E0B /* RootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		AC690C562ACF223C00138E0B /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AC690C592ACF223C00138E0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC690C5A2ACF223C00138E0B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC690C5B2ACF223C00138E0B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,7 +74,6 @@
 			children = (
 				AC690C532ACF223C00138E0B /* MainScreenCoordinator */,
 				AC690C552ACF223C00138E0B /* RootCoordinator.swift */,
-				AC690C562ACF223C00138E0B /* Coordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -275,7 +272,6 @@
 				AC690C702ACF223C00138E0B /* RootCoordinator.swift in Sources */,
 				AC690CB02ACF40C300138E0B /* MainScreenFactory.swift in Sources */,
 				AC690C6F2ACF223C00138E0B /* MainScreenCoordinator.swift in Sources */,
-				AC690C712ACF223C00138E0B /* Coordinator.swift in Sources */,
 				AC690CB32ACF40C300138E0B /* MainScreenInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
